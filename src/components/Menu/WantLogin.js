@@ -10,23 +10,16 @@ import {
 
 
 var {height, width} = Dimensions.get('window');
-export default class Menu extends Component{
+export default class WantLogin extends Component{
     render(){
         return(
             <View style={styles.wrapper}>
                 <View style={styles.profile}>
                     <Image style={styles.profile_image} source={require('../../media/temp/profile.png')} />
-                    <Text style={styles.name}>Đặng Duy Long</Text>
                 </View>
                 <View style={styles.button_option}>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate('LoginComponent')}>
-                        <Text style={styles.options}>Order History</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.options}>Change Info</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.options}>Sign Out</Text>
+                        <Text style={styles.options}>Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -52,10 +45,6 @@ var styles=StyleSheet.create({
         borderRadius: 100,
         marginBottom: height/50
     },
-    name:{
-        color:'white',
-        fontSize: 16
-    },
     button_option:{
         flex:2,
         marginTop: height/20
@@ -65,5 +54,6 @@ var styles=StyleSheet.create({
         padding: 15,
         backgroundColor:'white',
         borderRadius: 80,
+        textAlign:'center'
     }
 })

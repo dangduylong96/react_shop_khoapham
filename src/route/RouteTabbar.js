@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import { TabNavigator,TabBarBottom } from 'react-navigation';
 import { RouteStack } from './RouteStack.js';
+import Home from '../components/Home/Home.js';
+import ProductList from '../components/Product/ProductList.js';
 
 export const RouteTabbar=TabNavigator({
     Home:{
@@ -18,7 +20,7 @@ export const RouteTabbar=TabNavigator({
         }),
     },
     Cart:{
-        screen:RouteStack,
+        screen:ProductList,
         navigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Image style={styles.icon} source={require('../media/appIcon/cart.png')} />
