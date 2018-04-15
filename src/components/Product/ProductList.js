@@ -12,6 +12,22 @@ import Header from '../particle/Header.js';
 
 var {height, width} = Dimensions.get('window');
 export default class ProductList extends Component{
+    constructor(props){
+        super(props);
+        // this.state={
+        // }
+    }
+    
+    componentDidMount(){
+        // fetch('http://10.0.3.2:90/react_shop_server/product_by_type.php?id_type='+this.state.id_type)
+        // .then(res=>res.json())
+        // .then(resJson=>{
+        //     this.setState({
+        //         list_category:resJson.type,
+        //         top_product:resJson.product
+        //     })
+        // })
+    }
     render(){
         return(
             <View style={styles.wrapper}>
@@ -21,7 +37,9 @@ export default class ProductList extends Component{
                 <View style={styles.content}>
                     <ScrollView style={styles.maincontent}>
                         <View style={styles.headercontent}>
-                            <Image style={styles.headerimg} source={require('../../media/appIcon/backList.png')} />
+                            <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}}>
+                                <Image style={styles.headerimg} source={require('../../media/appIcon/backList.png')} />
+                            </TouchableOpacity>
                             <Text style={{color:'#CC4D8B',fontSize:18}}>Party Dress</Text>
                             <View style={{height:width/4}}></View>
                         </View>

@@ -5,7 +5,8 @@ import {
     StyleSheet,
     Image,
     Dimensions,
-    ScrollView
+    ScrollView,
+    TouchableOpacity
 } from 'react-native';
 
 var {height, width} = Dimensions.get('window');
@@ -17,7 +18,9 @@ export default class UserInformation extends Component{
                     <View style={styles.title}>
                         <Text style={{color:'white',fontSize:18}}>Order History</Text>
                     </View>
+                    <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Homescreen')}}>
                         <Image style={styles.backIcon} source={require('../../media/appIcon/backs.png')} />
+                    </TouchableOpacity>
                 </View>
                 <ScrollView>
                     <View style={styles.content}>

@@ -7,14 +7,34 @@ import {
     Image,
     Dimensions,
     ImageBackground,
-    ScrollView
+    ScrollView,
+    FlatList
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Header from '../particle/Header.js';
 
 var {height, width} = Dimensions.get('window');
 export default class Home extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            list_category:[],
+            top_product:[]
+        }
+    }
+    componentDidMount(){
+        fetch('http://10.0.3.2:90/react_shop_server/index.php')
+        .then(res=>res.json())
+        .then(resJson=>{
+            this.setState({
+                list_category:resJson.type,
+                top_product:resJson.product
+            })
+        })
+    }
+
     render(){
+        const {list_category,top_product}=this.state;
         return(
             <View style={styles.wrapper}>
                 <View style={styles.header}>
@@ -28,22 +48,18 @@ export default class Home extends Component{
                         </View>
                         <View style={styles.spring}>
                             <Text style={styles.text_spring}>LIST OF CATEGORY</Text>
-                            <Swiper containerStyle={{ width: width*0.95, height: height/3.5}} showsButtons={true} autoplay={true}>
-                                <TouchableOpacity style={styles.slide}>
-                                    <ImageBackground style={styles.spring_image} source={require('../../media/temp/fit.jpg')}>
-                                        <Text style={styles.text}>Fit</Text>
-                                    </ImageBackground>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.slide}>
-                                    <ImageBackground style={styles.spring_image} source={require('../../media/temp/little.jpg')}>
-                                        <Text style={styles.text}>Little</Text>
-                                    </ImageBackground>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.slide}>
-                                    <ImageBackground style={styles.spring_image} source={require('../../media/temp/maxi.jpg')}>
-                                            <Text style={styles.text}>Maxi</Text>
-                                    </ImageBackground>
-                                </TouchableOpacity>
+                            <Swiper containerStyle={{ width: width*0.95, height: height/3.5}} autoplay={true}>
+                                {
+                                    list_category.map(item=>(
+                                        <TouchableOpacity style={styles.slide} id_type={item.id} onPress={()=>this.props.navigation.navigate('ProductListscreen',{
+                                            item:item
+                                        })}>
+                                            <ImageBackground style={styles.spring_image} source={{uri:'http://10.0.3.2:90/react_shop_server/images/type/'+item.image}}>
+                                                <Text style={styles.text}>{item.name}</Text>
+                                            </ImageBackground>
+                                        </TouchableOpacity>
+                                    ))
+                                }
                             </Swiper>
                         </View>
                         <View style={styles.spring}>
@@ -51,33 +67,26 @@ export default class Home extends Component{
                                 <Text style={styles.text_spring}>TOP PRODUCT</Text>
                             </View>
                             <View style={styles.top_pro}>
-                                <TouchableOpacity style={styles.top_pro_item}>
-                                    <Image style={styles.top_pro_image} source={require('../../media/temp/sp1.jpeg')} />
-                                    <Text style={styles.top_pro_tex}>Black Of The</Text>
-                                    <Text style={styles.top_pro_price}>124$</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.top_pro_item}>
-                                    <Image style={styles.top_pro_image} source={require('../../media/temp/sp2.jpeg')} />
-                                    <Text style={styles.top_pro_tex}>Black Of The</Text>
-                                    <Text style={styles.top_pro_price}>124$</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.top_pro_item}>
-                                    <Image style={styles.top_pro_image} source={require('../../media/temp/sp3.jpeg')} />
-                                    <Text style={styles.top_pro_tex}>Black Of The</Text>
-                                    <Text style={styles.top_pro_price}>124$</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.top_pro_item}>
-                                    <Image style={styles.top_pro_image} source={require('../../media/temp/sp4.jpeg')} />
-                                    <Text style={styles.top_pro_tex}>Black Of The</Text>
-                                    <Text style={styles.top_pro_price}>124$</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.top_pro_item}>
-                                    <Image style={styles.top_pro_image} source={require('../../media/temp/sp5.jpeg')} />
-                                    <Text style={styles.top_pro_tex}>Black Of The</Text>
-                                    <Text style={styles.top_pro_price}>124$</Text>
-                                </TouchableOpacity>
+                                <FlatList 
+                                    data={top_product}
+                                    horizontal={false}
+                                    numColumns={2}
+                                    renderItem={({item})=>
+                                        <TouchableOpacity style={styles.top_pro_item} onPress={()=>this.props.navigation.navigate('ProductDetailscreen',{
+                                            name:item.name,
+                                            images:item.images,
+                                            price:item.price,
+                                            color:item.color,
+                                            description:item.description,
+                                            material:item.material
+                                        })}>
+                                            <Image style={styles.top_pro_image} source={{uri:'http://10.0.3.2:90/react_shop_server/images/product/'+item.images[0]}} />
+                                            <Text style={styles.top_pro_tex}>{item.name}</Text>
+                                            <Text style={styles.top_pro_price}>{item.price}$</Text>
+                                        </TouchableOpacity>
+                                    }
+                                />
                             </View>
-                            
                         </View>
                     </ScrollView>
                 </View>

@@ -19,10 +19,10 @@ export default class Menu extends Component{
                     <Text style={styles.name}>Đặng Duy Long</Text>
                 </View>
                 <View style={styles.button_option}>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('LoginComponent')}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('OrderHistoryComponent')}>
                         <Text style={styles.options}>Order History</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('UserInformationComponent')}>
                         <Text style={styles.options}>Change Info</Text>
                     </TouchableOpacity>
                     <TouchableOpacity>

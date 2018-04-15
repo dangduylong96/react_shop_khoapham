@@ -26,7 +26,9 @@ export default class OrderHistory extends Component{
                     <View style={styles.title}>
                         <Text style={{color:'white',fontSize:18}}>User Information</Text>
                     </View>
+                    <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Homescreen')}}>
                         <Image style={styles.backIcon} source={require('../../media/appIcon/backs.png')} />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.content}>
                     <TextInput

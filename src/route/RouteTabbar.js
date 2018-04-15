@@ -9,6 +9,8 @@ import { TabNavigator,TabBarBottom } from 'react-navigation';
 import { RouteStack } from './RouteStack.js';
 import Home from '../components/Home/Home.js';
 import ProductList from '../components/Product/ProductList.js';
+import Cart from '../components/Cart/Cart.js';
+import Search from '../components/Search/Search.js';
 
 export const RouteTabbar=TabNavigator({
     Home:{
@@ -20,7 +22,7 @@ export const RouteTabbar=TabNavigator({
         }),
     },
     Cart:{
-        screen:ProductList,
+        screen:Cart,
         navigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Image style={styles.icon} source={require('../media/appIcon/cart.png')} />
@@ -28,7 +30,7 @@ export const RouteTabbar=TabNavigator({
         }),
     },
     Search:{
-        screen:RouteStack,
+        screen:Search,
         navigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Image style={styles.icon} source={require('../media/appIcon/search.png')} />

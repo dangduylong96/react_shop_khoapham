@@ -24,7 +24,7 @@ export const RouteStack=StackNavigator({
     },
 
 },{
-    initialRouteName:'ProductDetailscreen',
+    initialRouteName:'Homescreen',
     headerMode: 'none',
     navigationOptions: {
         headerVisible: false,
